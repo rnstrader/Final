@@ -16,7 +16,7 @@ library(tidyverse)
 diabetes <- read.csv("diabetes_binary_health_indicators_BRFSS2015.csv")
 
 map_list <- list(
-  Diabetes_binary = c("No Diabetes", "Prediabetes", "Diabetes") |> setNames(c(0,1,2)),
+  Diabetes_binary = c("No Diabetes", "Diabetes") |> setNames(c(0,1)),
   HighBP = c("Normal", "High BP") |> setNames(c(0,1)),
   HighChol = c("Normal", "High Chol") |> setNames(c(0,1)),
   CholCheck = c("No", "Yes") |> setNames(c(0,1)),
@@ -44,5 +44,6 @@ diabetes <- diabetes |>
 
 Now that we have the data set available and with factor levels defined, we will now get several summarizations of the data.
 ```{r}
-
+diabetes |> group_by(Diabetes_binary, Smoker) |> summarise(count = n())
+diabetes |> group_by(Diabetes_binary, HighBP) |> summarise(count = n())
 ```
