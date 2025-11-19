@@ -8,6 +8,27 @@ editor: visual
 
 
 ## Data
-```{r}
 
+To start off we will explore the diabetes data set, beginning with importing the data and then naming categorical variable factors that correspond to the number codes of categorical variables.
+```{r}
+library(tidyverse)
+diabetes <- read.csv("diabetes_binary_health_indicators_BRFSS2015.csv")
+
+map_list <- list(
+  Diabetes_binary = c("No Diabetes", "Prediabetes", "Diabetes") |> setNames(c(0,1,2)),
+  HighBP = c("Normal", "High BP") |> setNames(c(0,1)),
+  HighChol = c("Normal", "High Chol") |> setNames(c(0,1)),
+  CholCheck = c("No", "Yes") |> setNames(c(0,1)),
+  Smoker = c("No", "Yes") |> setNames(c(0,1)),
+  Stroke = c("No", "Yes") |> setNames(c(0,1)),
+  HeartDiseaseorAttack = c("No", "Yes") |> setNames(c(0,1)),
+  PhysActivity = c("No", "Yes") |> setNames(c(0,1)),
+  Fruits = c("No", "Yes") |> setNames(c(0,1)),
+  Veggies = c("No", "Yes") |> setNames(c(0,1)),
+  HvyAlcoholConsump = c("No", "Yes") |> setNames(c(0,1)),
+  AnyHealthcare = c("No", "Yes") |> setNames(c(0,1)),
+  NoDocbcCost = c("No", "Yes") |> setNames(c(0,1)),
+  DiffWalk = c("No", "Yes") |> setNames(c(0,1)),
+  Sex = c("Female", "Male") |> setNames(c(0,1)),
+)
 ```
