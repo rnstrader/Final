@@ -47,11 +47,15 @@ Now that we have the data set available and with factor levels defined, we will 
 #Based on this simple summary, we can see that there are about 35000 diabetic and about 218000 non-diabetic patients.
 summary(diabetes$Diabetes_binary)
 
+#Plotting a table to compare how number of patients with high/low cholesterol is split between diabetic and non-diabetic population
 diabetes |> group_by(Diabetes_binary, HighChol) |> summarise(count = n())
 
+#Similar to previous table but using high/low blood pressure as variable of interest
 diabetes |> group_by(Diabetes_binary, HighBP) |> summarise(count = n())
 
+#Boxplot to compare the distribution of BMI scores between diabetic and non-diabetic populations
 diabetes |> ggplot(aes(x = Diabetes_binary, y = BMI)) + geom_boxplot() + theme_minimal() + labs(title = "Diabetes rate by BMI", x = "Diabetes", y = "BMI")
 
-diabetes |> ggplot(aes(x = HvyAlcoholConsump, fill = Diabetes_binary)) + geom_bar(position = "fill") + theme_minimal() + labs(title = "Diabetes vs Heavy Alcohol use", x = "Heavy Drinking", y = "Diabetes")
+#Bar plot to compare the proportion of patients who are diabetic by whether they are physically active
+diabetes |> ggplot(aes(x = PhysActivity, fill = Diabetes_binary)) + geom_bar(position = "fill") + theme_minimal() + labs(title = "Diabetes vs Physical Activity", x = "Physical Activity", y = "Proportion")
 ```
