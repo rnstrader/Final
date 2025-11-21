@@ -6,7 +6,9 @@ editor: visual
 
 ## Introduction
 
+The Diabetes Health Indicators Dataset is a collection of over 250000 people's diabetic status (either diabetic or non-diabetic, this is the response variable of interest) along with several variables that include health and socioeconomic information. Among these variables include those which we will examine closely in this project: high/normal cholesterol, high/normal blood pressure, general health wellness, BMI, and physical activity.
 
+The purpose of the EDA performed below is to import and clean the Diabetes Health dataset, afterwards the predictor variables of interest described above will be included in plots and tables that attempt to give us an initial idea about the distribution and influence that these predictor variables might have within the two groups of diabetic and non-diabetic patients. Eventually we will model the data to fully evaluate the influence and predict what health conditions of interest might be most likely to be displayed by diabetic patients.
 
 ## Data
 
