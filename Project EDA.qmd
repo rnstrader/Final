@@ -42,10 +42,12 @@ diabetes <- diabetes |>
 
 ## Summarizations
 
-Now that we have the data set available and with factor levels defined, we will now get several summarizations of the data.
+Now that we have the data set available and with factor levels defined, we will now get several summarizations of the data. For this data exploration and for when we make models to fit to the data, we will specifically look at five predictor variables that are suspected to correlate with diabetic conditions: high/normal cholesterol, high/normal blood pressure, age, BMI, and physical activity. To what extent these variables are associated with diabetic or non-diabetic patients will be investigated using EDA and modeling.
 ```{r}
 summary(diabetes$Diabetes_binary)
-diabetes |> group_by(Diabetes_binary, Smoker) |> summarise(prop_diabetes = mean(Diabetes_binary))
+
+diabetes |> group_by(Diabetes_binary, HighChol) |> summarise(count = n())
+
 diabetes |> group_by(Diabetes_binary, HighBP) |> summarise(count = n())
 
 diabetes |> ggplot(aes(x = Diabetes_binary, y = BMI)) + geom_boxplot() + theme_minimal() + labs(title = "Diabetes rate by BMI", x = "Diabetes", y = "BMI")
