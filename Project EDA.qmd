@@ -16,6 +16,7 @@ To start off we will explore the diabetes data set, beginning with importing the
 ```{r}
 library(tidyverse)
 diabetes <- read.csv("diabetes_binary_health_indicators_BRFSS2015.csv")
+colSums(is.na(diabetes))
 
 map_list <- list(
   Diabetes_binary = c("No Diabetes", "Diabetes") |> setNames(c(0,1)),
@@ -60,8 +61,10 @@ diabetes |> group_by(Diabetes_binary, HighBP) |> summarise(count = n())
 diabetes |> ggplot(aes(x = Diabetes_binary, y = BMI)) + geom_boxplot() + theme_minimal() + labs(title = "Diabetes rate by BMI", x = "Diabetes", y = "BMI")
 
 #Bar plot to compare the proportion of patients who are diabetic by whether they are physically active
-diabetes |> ggplot(aes(x = PhysActivity, fill = Diabetes_binary)) + geom_bar(position = "fill") + theme_minimal() + labs(title = "Diabetes vs Physical Activity", x = "Physical Activity", y = "Proportion")
+diabetes |> ggplot(aes(x = Diabetes_binary, fill = PhysActivity)) + geom_bar(position = "fill") + theme_minimal() + labs(title = "Diabetes vs Physical Activity", x = "Diabetes", y = "Proportion")
 
 #Boxplot to compare how the distribution of general health categories look between diabetic and non-diabetic populations
 diabetes |> ggplot(aes(x = Diabetes_binary, fill = GenHlth)) + geom_bar(position = "dodge") + theme_minimal() + labs(title = "Diabetes rate by General Health", x = "Diabetes", y = "Count")
 ```
+
+After looking at the plots and tables from our EDA, my initial predictions on how these predictor variables would vary between diabetic and non-diabetic populations aligns with what the graphs are suggesting. High cholesterol, high blood pressure, and lack of physical activity all exist at greater proportions in the diabetic community vs the non-diabetic. In addition, the distribution of BMIs among diabetics is shifted up compared to non-diabetics, and worse ratings of general health are more common proportionally within the diabetic community than the non-diabetic community.
