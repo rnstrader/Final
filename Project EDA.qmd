@@ -44,6 +44,7 @@ diabetes <- diabetes |>
 
 Now that we have the data set available and with factor levels defined, we will now get several summarizations of the data. For this data exploration and for when we make models to fit to the data, we will specifically look at five predictor variables that are suspected to correlate with diabetic conditions: high/normal cholesterol, high/normal blood pressure, age, BMI, and physical activity. To what extent these variables are associated with diabetic or non-diabetic patients will be investigated using EDA and modeling.
 ```{r}
+#Based on this simple summary, we can see that there are about 35000 diabetic and about 218000 non-diabetic patients.
 summary(diabetes$Diabetes_binary)
 
 diabetes |> group_by(Diabetes_binary, HighChol) |> summarise(count = n())
