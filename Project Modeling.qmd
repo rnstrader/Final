@@ -20,6 +20,8 @@ train_diabetes <- training(split)
 test_diabetes <- testing(split)
 ```
 
+## Classification Tree
+
 Next, we will fit a classification tree model to the data using varying values for the parameter and using five-fold CV on the training set to evaluate the best model. We will use the five predictors described in our EDA performed in the previous file. For clarity, a classification tree model splits the feature space into disjoint regions to create a tree of decisions, with each node having a predicted class distribution. The class with the highest probability is the predicted label.
 ```{r}
 #First we will need a recipe to set up our 5 predictors
@@ -62,4 +64,17 @@ tree_tune <- tune_grid(
   metrics = logloss,
   control = control_grid(verbose = TRUE)
 )
+```
+
+Now lets pick the best classification tree model.
+```{r}
+best_tree <- select_best(tree_tune, metric = "mn_log_loss")
+final_tree_wf <- finalize_workflow(tree_wf, best_tree)
+```
+
+## Random Forest
+
+A random 
+```{r}
+
 ```
