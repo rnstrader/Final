@@ -23,13 +23,43 @@ test_diabetes <- testing(split)
 Next, we will fit a classification tree model to the data using varying values for the parameter and using five-fold CV on the training set to evaluate the best model. We will use the five predictors described in our EDA performed in the previous file. For clarity, a classification tree model splits the feature space into disjoint regions to create a tree of decisions, with each node having a predicted class distribution. The class with the highest probability is the predicted label.
 ```{r}
 #First we will need a recipe to set up our 5 predictors
-rec <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = train_diabetes) |>
-  step_novel(all_nominal_predictors()) |>
-  step_normalize(all_numeric_predictors())
+rec <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = train_diabetes)
 
 #Our metric will be log-loss
 logloss <- metric_set(mn_log_loss)
 
 #Creating our five folds for evaluation
 cv_folds <- vfold_cv(train_diabetes, v = 5, strata = Diabetes_binary)
+
+#We are now ready to make the classification tree model
+tree_spec <- decision_tree(
+  mode = "classification",
+  cost_complexity = tune(),
+  tree_depth = tune(),
+  min_n = tune()
+) |>
+  set_engine("rpart")
+
+tree_wf <- workflow() |>
+  add_model(tree_spec) |>
+  add_recipe(rec)
+
+#Tuning grid for the tree
+tree_grid <- grid_random(
+  cost_complexity(range = c(-4, -2), trans = exp_trans()),
+  tree_depth(range = c(2L, 8L)),
+  min_n(range=c(10L, 40L)),
+  levels = 2
+)
+
+#Tune
+set.seed(567)
+
+tree_tune <- tune_grid(
+  tree_wf,
+  resamples = cv_folds,
+  grid = tree_grid,
+  metrics = logloss,
+  control = control_grid(verbose = TRUE)
+)
 ```
