@@ -49,7 +49,7 @@ tree_grid <- grid_random(
   cost_complexity(range = c(-4, -2), trans = exp_trans()),
   tree_depth(range = c(2L, 8L)),
   min_n(range=c(10L, 40L)),
-  levels = 2
+  size = 12
 )
 
 #Tune
