@@ -14,5 +14,13 @@ Before we can start modeling, we need to split the data into training (70%) and 
 ```{r}
 library(tidymodels)
 set.seed(123)
+
 split <- initial_split(diabetes, prop = 0.7, strata = Diabetes_binary)
+train_diabetes <- training(split)
+test_diabetes <- testing(split)
+```
+
+Next, we will fit a classification tree model to the data using varying values for the parameter and using five-fold CV on the training set to evaluate the best model. We will use the five predictors described in our EDA performed in the previous file. For clarity, a classification tree model splits the feature space into disjoint regions to create a tree of decisions, with each node having a predicted class distribution. The class with the highest probability is the predicted label.
+```{r}
+
 ```
