@@ -22,5 +22,14 @@ test_diabetes <- testing(split)
 
 Next, we will fit a classification tree model to the data using varying values for the parameter and using five-fold CV on the training set to evaluate the best model. We will use the five predictors described in our EDA performed in the previous file. For clarity, a classification tree model splits the feature space into disjoint regions to create a tree of decisions, with each node having a predicted class distribution. The class with the highest probability is the predicted label.
 ```{r}
+#First we will need a recipe to set up our 5 predictors
+rec <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = train_diabetes) |>
+  step_novel(all_nominal_predictors()) |>
+  step_normalize(all_numeric_predictors())
 
+#Our metric will be log-loss
+logloss <- metric_set(mn_log_loss)
+
+#Creating our five folds for evaluation
+cv_folds <- vfold_cv(train_diabetes, v = 5, strata = Diabetes_binary)
 ```
