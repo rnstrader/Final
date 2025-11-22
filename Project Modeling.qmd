@@ -6,3 +6,13 @@ editor: visual
 
 ## Introduction
 
+In this file, we will be continuing the analysis of the diabetes data set from the EDA file. This file will focus on modeling the data using a training data set to fit a classification tree and random forest model. The use of these models will allow us to predict the Diabetes_binary variable. We will finally narrow the selection of models to only our best classification tree and our best random forest model using log-loss with five-fold cross validation, before comparing these final two to declare an overall best model. 
+
+## Data Preparation
+
+Before we can start modeling, we need to split the data into training (70%) and test (30%) sets.
+```{r}
+library(tidymodels)
+set.seed(123)
+split <- initial_split(diabetes, prop = 0.7, strata = Diabetes_binary)
+```
