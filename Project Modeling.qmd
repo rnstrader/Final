@@ -74,7 +74,50 @@ final_tree_wf <- finalize_workflow(tree_wf, best_tree)
 
 ## Random Forest
 
-A random 
+A random forest model is an ensemble model of many decision trees whose predictions are aggregated, by majority vote for classification trees and by average for regression trees. Advantages of using a random forest model include much less variance of predictors when compared to a single tree and better predictive performance often when compared to single trees. 
 ```{r}
+set.seed(123)
 
+#recipe for the same predictors as before
+rec_rf <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = train_diabetes)
+
+# model specifications with tuning
+rf_spec <- rand_forest(
+  mode = "classification",
+  mtry = tune(),
+  min_n = 10,
+  trees = 200
+) |>
+  set_engine("ranger")
+
+rf_wf <- workflow() |>
+  add_model(rf_spec) |>
+  add_recipe(rec_rf)
+
+#Our metric will be log-loss
+logloss <- metric_set(mn_log_loss)
+
+#Creating our five-fold cross validation for this model
+cv_folds <- vfold_cv(train_diabetes, v = 5, strata = Diabetes_binary)
+
+#Tuning grid
+rf_grid <- grid_regular(
+  mtry(range = c(1, 5)),
+  levels = 5
+)
+
+#Tune
+rf_tune <- tune_grid(
+  rf_wf,
+  resamples = cv_folds,
+  grid = rf_grid,
+  metrics = logloss,
+  control = control_grid()
+)
+```
+
+Now let us pick the best model out of the random forest models generated.
+```{r}
+best_rf <- select_best(rf_tune, metric = "mn_log_loss")
+final_rf_wf <- finalize_workflow(rf_wf, best_rf)
 ```
