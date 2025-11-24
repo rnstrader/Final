@@ -126,5 +126,24 @@ final_rf_wf <- finalize_workflow(rf_wf, best_rf)
 
 Now that we have one best model for both classification tree and random forest model, we can fit both to the test data and evaluate the effectiveness of each model in order to declare an overall winner.
 ```{r}
+#First we evaluate each model on the test set
+tree_test_results <- last_fit(
+  final_tree_wf,
+  split,
+  metrics = metric_set(mn_log_loss)
+)
 
+rf_test_results <- last_fit(
+  final_rf_wf,
+  split,
+  metrics = metric_set(mn_log_loss)
+) 
+
+#Then we use log-loss metrics to declare a winner
+tree_logloss <- collect_metrics(tree_test_results)
+rf_logloss <- collect_metrics(rf_test_results)
+tree_logloss
+rf_logloss
 ```
+
+Based on our evaluations, it appears that the random forest model has the lowest log-loss output although by a slim margin. Therefore we have declared it the best model.
