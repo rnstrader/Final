@@ -22,5 +22,13 @@ default_vals <- list(
   GenHlth = "Very Good"
 )
 
-#API
-function(HighBP = default_vals$HighBP)
+#API /pred endpoint
+function(HighBP = default_vals$HighBP,
+         HighChol = default_vals$HighChol,
+         BMI = default_vals$BMI,
+         PhysActivity = default_vals$PhysActivity,
+         GenHlth = default_vals$GenHlth) {
+  new_obs <- tibble(
+    
+  )
+}
