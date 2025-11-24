@@ -44,6 +44,12 @@ function(HighBP = default_vals$HighBP,
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = 1),
 #           encode = "json")
+#httr::POST("http://127.0.0.1:8000/pred",
+#           body = list(HighBP = "Yes", HighChol = "Yes", BMI = 35, PhysActivity = "No", GenHlth = 4),
+#           encode = "json")
+#httr::POST("http://127.0.0.1:8000/pred",
+#           body = list(),
+#           encode = "json")
 
 #Starting the plumber api
 pr("API.R") |> pr_run(port = 8000)
