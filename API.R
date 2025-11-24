@@ -29,6 +29,21 @@ function(HighBP = default_vals$HighBP,
          PhysActivity = default_vals$PhysActivity,
          GenHlth = default_vals$GenHlth) {
   new_obs <- tibble(
-    
+    HighBP = HighBP,
+    HighChol = HighChol,
+    BMI = BMI,
+    PhysActivity = PhysActivity,
+    GenHlth = GenHlth
   )
+  
+  pred <- predict(final_model, new_obs, type = "prob")
+  return(pred)
 }
+
+#Example API calls
+#httr::POST("http://127.0.0.1:8000/pred",
+#           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = 1),
+#           encode = "json")
+
+#Starting the plumber api
+pr("API.R") |> pr_run(port = 8000)
