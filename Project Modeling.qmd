@@ -121,3 +121,10 @@ Now let us pick the best model out of the random forest models generated.
 best_rf <- select_best(rf_tune, metric = "mn_log_loss")
 final_rf_wf <- finalize_workflow(rf_wf, best_rf)
 ```
+
+## Final Model Selection
+
+Now that we have one best model for both classification tree and random forest model, we can fit both to the test data and evaluate the effectiveness of each model in order to declare an overall winner.
+```{r}
+
+```
