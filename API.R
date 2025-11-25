@@ -51,6 +51,19 @@ pr() |>
     )
   })
 
+#/confusion endpoint
+function() {
+  preds <- final_model |>
+    predict(new_data = diabetes) |>
+    bind_cols(diabetes |> select(Diabetes_binary))
+  
+  cm <- conf_mat(preds, truth = Diabetes_binary, estimate = .pred_class)
+  cm_df <- as.data.frame(cm$table)
+  
+  p <- ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
+  print(p)
+}
+
 #Example API calls
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = 1),
@@ -64,3 +77,4 @@ pr() |>
 
 #Starting the plumber api
 pr("API.R") |> pr_run(port = 8000)
+
