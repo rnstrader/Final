@@ -1,6 +1,8 @@
 library(plumber)
 library(tidyverse)
 library(tidymodels)
+diabetes <- readRDS("diabetes.rds")
+final_rf_wf <- readRDS("final_rf_wf.rds")
 
 #In this API.R file we will be fitting our best model (random forest) to the entire dataset.
 #Then we will create an API using this fitted best model.
