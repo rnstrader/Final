@@ -40,6 +40,15 @@ function(HighBP = default_vals$HighBP,
   return(pred)
 }
 
+#/info endpoint
+pr() |>
+  pr_get("/info", function(req, res) {
+    list(
+      name = "Ryan Strader",
+      github_pages = "http://rnstrader.github.io/Final"
+    )
+  })
+
 #Example API calls
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = 1),
