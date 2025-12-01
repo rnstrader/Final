@@ -2,6 +2,8 @@ library(plumber)
 library(tidyverse)
 library(tidymodels)
 library(ranger)
+library(GGally)
+library(leaflet)
 diabetes <- readRDS("diabetes.rds")
 final_rf_wf <- readRDS("final_rf_wf.rds")
 
