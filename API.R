@@ -1,6 +1,7 @@
 library(plumber)
 library(tidyverse)
 library(tidymodels)
+library(ranger)
 diabetes <- readRDS("diabetes.rds")
 final_rf_wf <- readRDS("final_rf_wf.rds")
 
