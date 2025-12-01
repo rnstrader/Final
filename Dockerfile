@@ -1,0 +1,17 @@
+#official R plumber image
+FROM rstudio/plumber:latest
+
+#Install libraries
+RUN apt-get update -qq && apt-get install -y libssl-dev libcurl4-gnutls-dev libpng-dev libpng-dev pandoc
+
+#Install R packages required
+RUN R -e "install.packages(c('GGally', 'leaflet', 'plumber'))"
+
+#Copy my API
+COPY API.R API.R
+
+#port plumber will run on
+EXPOSE 8000
+
+#Starting API when the container launches
+ENTRYPOINT ["R", "-e", "pr <- plumber::plumb('API.R'); pr$run(host='0.0.0.0', port=8000)"]
