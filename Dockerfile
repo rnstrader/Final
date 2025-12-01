@@ -7,8 +7,9 @@ RUN apt-get update -qq && apt-get install -y libssl-dev libcurl4-gnutls-dev libp
 #Install R packages required
 RUN R -e "install.packages(c('GGally', 'leaflet', 'plumber'))"
 
-#Copy my API
+#Copy my API and related files
 COPY API.R API.R
+COPY diabetes.rds diabetes.rds
 
 #port plumber will run on
 EXPOSE 8000
