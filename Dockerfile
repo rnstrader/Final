@@ -10,6 +10,7 @@ RUN R -e "install.packages(c('GGally', 'leaflet', 'plumber', 'tidyverse', 'tidym
 #Copy my API and related files
 COPY API.R API.R
 COPY diabetes.rds diabetes.rds
+COPY final_rf_wf.rds final_rf_wf.rds
 
 #port plumber will run on
 EXPOSE 8000
