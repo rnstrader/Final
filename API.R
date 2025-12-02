@@ -30,6 +30,13 @@ default_vals <- list(
 pr <- plumber$new()
 
 #API /pred endpoint
+#* @post /pred
+#* @param HighBP The high blood pressure status (e.g., 'Normal', 'High BP').
+#* @param HighChol The high cholesterol status (e.g., 'Normal', 'High Chol').
+#* @param BMI Body Mass Index (numeric).
+#* @param PhysActivity Physical activity status (e.g., 'Yes', 'No').
+#* @param GenHlth General health status (e.g., 'Excellent', 'Very Good', etc.).
+#* @serializer unbox
 pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
          HighChol = default_vals$HighChol,
          BMI = default_vals$BMI,
@@ -47,6 +54,7 @@ pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
 })
 
 #/info endpoint
+#* @get /info
 pr$handle("GET", "/info", function() {
     list(
       name = "Ryan Strader",
@@ -55,6 +63,8 @@ pr$handle("GET", "/info", function() {
   })
 
 #/confusion endpoint
+#* @get /confusion
+#* @serializer contentType list(type='image/png')
 pr$handle("GET", "/confusion", function() {
   preds <- final_model |>
     predict(new_data = diabetes) |>
