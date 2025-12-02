@@ -38,7 +38,7 @@ pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
   new_obs <- tibble(
     HighBP = HighBP,
     HighChol = HighChol,
-    BMI = BMI,
+    BMI = as.numeric(BMI),
     PhysActivity = PhysActivity,
     GenHlth = GenHlth
   )
