@@ -27,8 +27,10 @@ default_vals <- list(
   GenHlth = "Very Good"
 )
 
+pr <- plumber$new()
+
 #API /pred endpoint
-function(HighBP = default_vals$HighBP,
+pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
          HighChol = default_vals$HighChol,
          BMI = default_vals$BMI,
          PhysActivity = default_vals$PhysActivity,
@@ -41,13 +43,11 @@ function(HighBP = default_vals$HighBP,
     GenHlth = GenHlth
   )
   
-  pred <- predict(final_model, new_obs, type = "prob")
-  return(pred)
-}
+  predict(final_model, new_obs, type = "prob")
+})
 
 #/info endpoint
-pr() |>
-  pr_get("/info", function(req, res) {
+pr$handle("GET", "/info", function() {
     list(
       name = "Ryan Strader",
       github_pages = "http://rnstrader.github.io/Final"
