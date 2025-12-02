@@ -14,7 +14,6 @@ final_rf_wf <- readRDS("final_rf_wf.rds")
 final_rec <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = diabetes)
 final_model <- final_rf_wf |>
   fit(data = diabetes)
-final_model
 
 #Next, we will Build an API with three endpoints starting with a /pred endpoint below:
 
@@ -37,7 +36,7 @@ pr <- plumber$new()
 #* @param PhysActivity Physical activity status (e.g., 'Yes', 'No').
 #* @param GenHlth General health status (e.g., 'Excellent', 'Very Good', etc.).
 #* @serializer json list(auto_unbox = TRUE)
-pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
+function(HighBP = default_vals$HighBP,
          HighChol = default_vals$HighChol,
          BMI = default_vals$BMI,
          PhysActivity = default_vals$PhysActivity,
@@ -51,21 +50,21 @@ pr$handle("POST", "/pred", function(HighBP = default_vals$HighBP,
   )
   
   predict(final_model, new_obs, type = "prob")
-})
+}
 
 #/info endpoint
 #* @get /info
-pr$handle("GET", "/info", function() {
+info_function <- function() {
     list(
       name = "Ryan Strader",
       github_pages = "http://rnstrader.github.io/Final"
     )
-  })
+  }
 
 #/confusion endpoint
 #* @get /confusion
 #* @serializer contentType list(type='image/png')
-pr$handle("GET", "/confusion", function() {
+confusion_function <- function() {
   preds <- final_model |>
     predict(new_data = diabetes) |>
     bind_cols(diabetes |> select(Diabetes_binary))
@@ -75,7 +74,7 @@ pr$handle("GET", "/confusion", function() {
   
   plot <- ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
   print(plot)
-})
+}
 
 #Example API calls
 #httr::POST("http://127.0.0.1:8000/pred",
