@@ -20,8 +20,8 @@ final_model
 
 #Setting up default values based on full dataset
 default_vals <- list(
-  HighBP = "No",
-  HighChol = "No",
+  HighBP = "Normal",
+  HighChol = "Normal",
   BMI = mean(diabetes$BMI),
   PhysActivity = "Yes",
   GenHlth = "Very Good"
@@ -68,10 +68,10 @@ pr$handle("GET", "/confusion", function() {
 
 #Example API calls
 #httr::POST("http://127.0.0.1:8000/pred",
-#           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = "Excellent"),
+#           body = list(HighBP = "Normal", HighChol = "Normal", BMI = 22, PhysActivity = "Yes", GenHlth = "Excellent"),
 #           encode = "json")
 #httr::POST("http://127.0.0.1:8000/pred",
-#           body = list(HighBP = "Yes", HighChol = "Yes", BMI = 35, PhysActivity = "No", GenHlth = "Fair"),
+#           body = list(HighBP = "High BP", HighChol = "High Chol", BMI = 35, PhysActivity = "No", GenHlth = "Fair"),
 #           encode = "json")
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(),
