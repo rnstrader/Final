@@ -16,4 +16,4 @@ COPY final_rf_wf.rds final_rf_wf.rds
 EXPOSE 8000
 
 #Starting API when the container launches
-ENTRYPOINT ["R", "-e", "pr <- plumber::plumb('API.R'); pr$run(host='0.0.0.0', port=8000)"]
+ENTRYPOINT ["R", "-e", "pr <- plumber::plumb("API.R"); pr$run(host='0.0.0.0', port=8000)"]
