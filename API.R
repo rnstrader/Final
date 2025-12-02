@@ -67,9 +67,9 @@ pr$handle("GET", "/confusion", function() {
 })
 
 #Example API calls
-#httr::POST("http://127.0.0.1:8000/pred",
-#           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = "Excellent"),
-#           encode = "json")
+httr::POST("http://127.0.0.1:8000/pred",
+           body = list(HighBP = "No", HighChol = "No", BMI = 22, PhysActivity = "Yes", GenHlth = "Excellent"),
+           encode = "json")
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(HighBP = "Yes", HighChol = "Yes", BMI = 35, PhysActivity = "No", GenHlth = "Fair"),
 #           encode = "json")
