@@ -63,7 +63,8 @@ pr$handle("GET", "/confusion", function() {
   cm <- conf_mat(preds, truth = Diabetes_binary, estimate = .pred_class)
   cm_df <- as.data.frame(cm$table)
   
-  ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
+  plot <- ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
+  print(plot)
 })
 
 #Example API calls
