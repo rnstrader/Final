@@ -73,4 +73,3 @@ Saving necessary information for modeling file
 ```{r}
 save.image(file = "project_eda.RData")
 ```
-
