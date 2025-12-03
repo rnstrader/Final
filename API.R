@@ -63,7 +63,7 @@ info_function <- function() {
 #/confusion endpoint
 #* @get /confusion
 #* @serializer contentType list(type='image/png')
-confusion_function <- function() {
+confusion_function <- function(res) {
   preds <- final_model |>
     predict(new_data = diabetes) |>
     bind_cols(diabetes |> select(Diabetes_binary))
