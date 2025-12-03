@@ -72,7 +72,14 @@ confusion_function <- function() {
   cm_df <- as.data.frame(cm$table)
   
   plot <- ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
+  
+  tmp_file <- tempfile(fileext = ".png")
+  png(filename = tmp_file, width = 800, height = 600)
   print(plot)
+  dev.off()
+  
+  res$setHeader("Content-Type", "image/png")
+  readBin(tmp_file, "raw", n = file.info(tmp_file)$size)
 }
 
 #Example API calls
