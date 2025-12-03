@@ -76,4 +76,4 @@ save.image(file = "project_eda.RData")
 
 Link to Modeling file
 
-* [View the Full Modeling and Results Analysis]("Project Modeling.qmd")
+* [View the Full Modeling and Results Analysis]( "Project Modeling.qmd" )
