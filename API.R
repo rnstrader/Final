@@ -5,15 +5,15 @@ library(ranger)
 library(GGally)
 library(leaflet)
 library(ggplot2)
-diabetes <- readRDS("diabetes.rds")
-final_rf_wf <- readRDS("final_rf_wf.rds")
+diabetes <<- readRDS("diabetes.rds")
+final_rf_wf <<- readRDS("final_rf_wf.rds")
 
 #In this API.R file we will be fitting our best model (random forest) to the entire dataset.
 #Then we will create an API using this fitted best model.
 
 #First, we will be fitting the best model to the full dataset.
 final_rec <- recipe(Diabetes_binary ~ HighBP + HighChol + BMI + PhysActivity + GenHlth, data = diabetes)
-final_model <- final_rf_wf |>
+final_model <<- final_rf_wf |>
   fit(data = diabetes)
 
 #Next, we will Build an API with three endpoints starting with a /pred endpoint below:
