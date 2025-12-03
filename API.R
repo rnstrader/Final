@@ -26,8 +26,6 @@ default_vals <- list(
   GenHlth = "Very Good"
 )
 
-pr <- plumber$new()
-
 #API /pred endpoint
 #* @post /pred
 #* @param HighBP The high blood pressure status (e.g., 'Normal', 'High BP').
@@ -86,7 +84,3 @@ confusion_function <- function() {
 #httr::POST("http://127.0.0.1:8000/pred",
 #           body = list(),
 #           encode = "json")
-
-#Starting the plumber api
-pr$run(host = "0.0.0.0", port = 8000)
-
