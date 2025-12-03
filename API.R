@@ -72,7 +72,13 @@ confusion_function <- function() {
   cm_df <- as.data.frame(cm$table)
   
   plot <- ggplot(cm_df, aes(x = Prediction, y = Truth, fill = Freq)) + geom_tile() + geom_text(aes(label = Freq), size = 6) + scale_fill_gradient(low = "white", high = "limegreen") + labs(title = "Confusion Matrix for Final Random Forest Model", x = "Predicted Class", y = "Actual Class") + theme_minimal()
-  print(plot)
+  
+  
+  if(exists("plot")) {
+    print(plot)
+  } else {
+    stop("Plot object could not be created.")
+  }
 }
 
 #Example API calls
