@@ -1,9 +1,10 @@
-project: 
+project:
   type: website
   output-dir: docs
-  navbar: 
+website:
+  navbar:
     left:
       - href: "Project EDA.qmd"
-        text: Project EDA
+        text: Home (EDA)
       - href: "Project Modeling.qmd"
-        text: Project Modeling
+        text: Modeling Analysis
