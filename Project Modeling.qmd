@@ -12,6 +12,9 @@ In this file, we will be continuing the analysis of the diabetes data set from t
 
 Before we can start modeling, we need to split the data into training (70%) and test (30%) sets.
 ```{r}
+#Loading objects from EDA file
+load("project_eda.RData")
+
 library(tidymodels)
 set.seed(123)
 
