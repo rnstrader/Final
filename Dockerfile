@@ -5,7 +5,7 @@ FROM rstudio/plumber:latest
 RUN apt-get update -qq && apt-get install -y libssl-dev libcurl4-gnutls-dev libpng-dev libpng-dev pandoc
 
 #Install R packages required
-RUN R -e "install.packages(c('GGally', 'leaflet', 'plumber', 'tidyverse', 'tidymodels', 'ranger'))"
+RUN R -e "install.packages(c('GGally', 'leaflet', 'plumber', 'tidyverse', 'tidymodels', 'ranger', 'ggplot2'))"
 
 #Copy my API and related files
 COPY API.R API.R

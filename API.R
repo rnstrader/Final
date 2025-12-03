@@ -4,6 +4,7 @@ library(tidymodels)
 library(ranger)
 library(GGally)
 library(leaflet)
+library(ggplot2)
 diabetes <- readRDS("diabetes.rds")
 final_rf_wf <- readRDS("final_rf_wf.rds")
 
@@ -27,7 +28,7 @@ default_vals <- list(
 )
 
 #API /pred endpoint
-#* @post /pred
+#* @get /pred
 #* @param HighBP The high blood pressure status (e.g., 'Normal', 'High BP').
 #* @param HighChol The high cholesterol status (e.g., 'Normal', 'High Chol').
 #* @param BMI Body Mass Index (numeric).
